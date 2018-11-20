@@ -3,8 +3,6 @@ package com.example.latte.app;
 import android.content.Context;
 
 import java.util.HashMap;
-import java.util.WeakHashMap;
-
 /**
  * @author Marko
  * @date 2018/11/14

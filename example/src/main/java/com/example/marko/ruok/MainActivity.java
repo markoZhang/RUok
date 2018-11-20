@@ -1,14 +1,12 @@
 package com.example.marko.ruok;
 
+import com.example.latte.activities.ProxyActivity;
+import com.example.latte.delegates.LatteDelegate;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ProxyActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public LatteDelegate setRootDelegate() {
+        return new ExampleDelegate();
     }
 }

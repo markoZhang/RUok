@@ -9,9 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        configurations.all {
-            resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
-        }
+//        configurations.all {
+//            resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
+//        }
     }
     buildTypes {
         release {
@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 //    app依赖于latte-core，所以多余的重复代码不需要
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
