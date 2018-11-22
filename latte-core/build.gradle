@@ -3,17 +3,12 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
-
-
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -22,7 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -42,4 +36,9 @@ dependencies {
     //ButterKnife依赖
     api 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //网络请求依赖
+    compile 'com.squareup.okio:okio:1.14.0'
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile 'com.squareup.retrofit2:retrofit:2.4.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
 }
