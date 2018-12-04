@@ -7,6 +7,7 @@ import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.net.callback.RequestCallbacks;
+import com.example.latte.net.download.DownloadHandler;
 import com.example.latte.ui.LatteLoader;
 import com.example.latte.ui.LoaderStyle;
 
@@ -19,7 +20,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.http.Multipart;
 
 /**
  * @author Marko
@@ -31,6 +31,12 @@ public class RestClient {
     private final String URL;
     private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final IRequest REQUEST;
+    //下载目录
+    private final String DOWNLOAD_DIR;
+    //文件的后缀
+    private final String EXTENSION;
+    //文件名
+    private final String NAME;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
@@ -40,12 +46,23 @@ public class RestClient {
     private final Context CONTEXT;
 
     public RestClient(String url, Map<String, Object> params,
-                      IRequest request, ISuccess success,
-                      IFailure failure, IError error, RequestBody body,
-                      File file, Context context, LoaderStyle loaderStyle) {
+                      IRequest request,
+                      String downloadDir,
+                      String extension,
+                      String name,
+                      ISuccess success,
+                      IFailure failure,
+                      IError error,
+                      RequestBody body,
+                      File file,
+                      Context context,
+                      LoaderStyle loaderStyle) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.SUCCESS = success;
         this.FAILURE = failure;
         this.ERROR = error;
@@ -92,7 +109,7 @@ public class RestClient {
                         RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
                 final MultipartBody.Part body =
                         MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
-                call = RestCreator.getRestService().upload(URL, body); 
+                call = RestCreator.getRestService().upload(URL, body);
                 break;
             default:
                 break;
@@ -134,5 +151,9 @@ public class RestClient {
 
     public final void delete() {
         request(HttpMethod.DELETE);
+    }
+
+    public final void sownload(){
+        new DownloadHandler(URL,REQUEST,DOWNLOAD_DIR,EXTENSION,NAME,SUCCESS,FAILURE,ERROR).handleDownload();
     }
 }
