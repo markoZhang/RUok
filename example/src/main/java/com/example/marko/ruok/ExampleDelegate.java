@@ -2,9 +2,12 @@ package com.example.marko.ruok;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.latte.app.ConfigKeys;
+import com.example.latte.app.Latte;
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.IFailure;
@@ -29,12 +32,19 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-                .url("https://news.baidu.com")
+                .url("http://localhost:8080/untitled_war_exploded/index")
+//                .url("https://www.baidu.com")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void success(String response) {
                         Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(), "Failure!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .build()
