@@ -7,7 +7,7 @@ import java.util.TimerTask;
  * @date 2018/12/7
  */
 
-public class BaseTimerTask extends TimerTask{
+public class BaseTimerTask extends TimerTask {
 
     private ITimerListener mITimerListener = null;
 
@@ -17,7 +17,7 @@ public class BaseTimerTask extends TimerTask{
 
     @Override
     public void run() {
-        if (mITimerListener != null){
+        if (mITimerListener != null) {
             mITimerListener.onTimer();
         }
     }
