@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+//在library中使用ButterKnife必须加入此依赖,否则找不到R文件
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
@@ -30,4 +32,6 @@ dependencies {
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api project(':latte-core')
+    //在library中使用ButterKnife必须加入此依赖,否则找不到R文件
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
