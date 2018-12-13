@@ -26,11 +26,11 @@ public abstract class ProxyActivity extends SupportActivity{
     }
 
     /**
-     * 传入跟delegate
+     * 传入根delegate
      * @param savedInstanceState
      */
     private void initContainer(@Nullable Bundle savedInstanceState){
-        //ContentFrameLayout时V7包中的容纳Fragment的容器
+        //ContentFrameLayout是V7包中的容纳Fragment的容器
         final ContentFrameLayout container = new ContentFrameLayout(this);
         container.setId(R.id.delegate_container);
         setContentView(container);

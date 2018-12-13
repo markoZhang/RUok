@@ -3,8 +3,10 @@ package com.example.marko.ruok;
 import android.app.Application;
 
 import com.example.latte.app.Latte;
+import com.example.latte.ec.database.DatabaseManager;
 import com.example.latte.ec.icon.FontEcModule;
 import com.example.latte.net.interceptors.DebugInterceptor;
+import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 
@@ -13,7 +15,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  * @date 2018/11/14
  */
 
-public class ExampleApp extends Application{
+public class ExampleApp extends Application {
 
     @Override
     public void onCreate() {
@@ -22,7 +24,18 @@ public class ExampleApp extends Application{
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withApiHost("http://localhost:8080/untitled_war_exploded/")
-                .withInterceptor(new DebugInterceptor("index",R.raw.test))
+                .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .configure();
+        initStetho();
+        DatabaseManager.getInstance().init(this);
+    }
+
+    private void initStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build()
+        );
     }
 }

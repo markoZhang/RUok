@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 //在library中使用ButterKnife必须加入此依赖,否则找不到R文件
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
