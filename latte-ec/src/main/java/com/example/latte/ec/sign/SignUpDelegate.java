@@ -1,5 +1,6 @@
 package com.example.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -7,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.latte.app.ISignListener;
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
@@ -36,6 +38,16 @@ public class SignUpDelegate extends LatteDelegate {
     @BindView(R2.id.edit_sign_up_re_pwd)
     TextInputEditText mRePassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
         if (checkForm()){
@@ -48,15 +60,8 @@ public class SignUpDelegate extends LatteDelegate {
                     .success(new ISuccess() {
                         @Override
                         public void success(String response) {
-                            Toast.makeText(getContext(),"注册成功",Toast.LENGTH_SHORT).show();
                             LatteLogger.json("USER_PROFILE",response);
-                            SignHandler.onSignUp(response);
-                        }
-                    })
-                    .failure(new IFailure() {
-                        @Override
-                        public void onFailure() {
-                            Toast.makeText(getContext(),"注册失败",Toast.LENGTH_SHORT).show();
+                            SignHandler.onSignUp(response,mISignListener);
                         }
                     })
                     .build()

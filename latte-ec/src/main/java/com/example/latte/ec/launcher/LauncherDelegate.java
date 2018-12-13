@@ -1,14 +1,19 @@
 package com.example.latte.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.example.latte.app.AccountManager;
+import com.example.latte.app.IUserChecker;
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ui.launcher.ILauncherListener;
 import com.example.latte.ui.launcher.ScrollLauncherTag;
+import com.example.latte.ui.launcher.onLauncherFinishTag;
 import com.example.latte.utils.storage.LattePreference;
 import com.example.latte.utils.timer.BaseTimerTask;
 import com.example.latte.utils.timer.ITimerListener;
@@ -31,6 +36,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
     private Timer mTimer = null;
     private int mCount = 5;
+    private ILauncherListener mILauncherListener = null;
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClickTimerView() {
@@ -58,6 +64,25 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
             start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否已经登录
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    mILauncherListener.onLauncherFinish(onLauncherFinishTag.SIGNED);
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    mILauncherListener.onLauncherFinish(onLauncherFinishTag.NOT_SIGNED);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener){
+            mILauncherListener = (ILauncherListener) activity;
         }
     }
 
