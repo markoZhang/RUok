@@ -84,7 +84,7 @@
       <option name="IGNORE_JAVADOC_PERIOD" value="true" />
       <option name="IGNORE_DUPLICATED_THROWS" value="false" />
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
-      <option name="myAdditionalJavadocTags" value="date" />
+      <option name="myAdditionalJavadocTags" value="date,Target:注解的作用目标,Target(ElementType.PACKAGE) ///包   ,Target(ElementType.ANNOTATION_TYPE)//注解,Target(ElementType.LOCAL_VARIABLE)//局部变量,Target(ElementType.CONSTRUCTOR) ,Target(ElementType.PARAMETER),Target(ElementType.METHOD) //方法,Target(ElementType.FIELD) //字段、枚举的常量,Target(ElementType.TYPE)  " />
     </inspection_tool>
     <inspection_tool class="MapOrSetKeyShouldOverrideHashCodeEquals" enabled="false" level="CRITICAL" enabled_by_default="false" />
   </profile>
