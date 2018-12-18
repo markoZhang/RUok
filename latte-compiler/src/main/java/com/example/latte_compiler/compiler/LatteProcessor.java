@@ -50,8 +50,10 @@ public class LatteProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-
-        return false;
+        generateEntryCode(roundEnvironment);
+        generatePayEntryCode(roundEnvironment);
+        generateAppRegisterCode(roundEnvironment);
+        return true;
     }
 
     private void scan(RoundEnvironment env,
@@ -74,9 +76,24 @@ public class LatteProcessor extends AbstractProcessor {
     }
 
     /**
-     * 生成EntryGenerator标注的注解，即生成微信EntryActivity
+     * 生成EntryGenerator标注的注解，即生成WXEntryActivity
+     * 微信规定入口文件必须叫WXEntryActivity
      */
-    private void generateEntryCode(RoundEnvironment env){
+    private void generateEntryCode(RoundEnvironment env) {
+        final EntryVisitor entryVisitor = new EntryVisitor();
+        entryVisitor.setFilter(processingEnv.getFiler());
+        scan(env, EntryGenerator.class, entryVisitor);
+    }
 
+    private void generatePayEntryCode(RoundEnvironment env) {
+        final PayEntryVisitor payEntryVisitor = new PayEntryVisitor();
+        payEntryVisitor.setFilter(processingEnv.getFiler());
+        scan(env, PayEntryGenerator.class, payEntryVisitor);
+    }
+
+    private void generateAppRegisterCode(RoundEnvironment env) {
+        final AppRegisterVisitor appRegisterGenerator = new AppRegisterVisitor();
+        appRegisterGenerator.setFilter(processingEnv.getFiler());
+        scan(env, AppRegisterGenerator.class, appRegisterGenerator);
     }
 }

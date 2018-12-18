@@ -17,5 +17,5 @@ public @interface PayEntryGenerator {
 
     String packageName();
 
-    Class<?> payEntryTemplete();
+    Class<?> payEntryTemplate();
 }

@@ -30,12 +30,13 @@ dependencies {
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     /**
      * Android studio3.0中，compile依赖关系已被弃用，被implementation和api替代，
-     * provided被compile only替代，apk被runtime only替代。
+     * provided被compileOnly替代，apk被runtime only替代。
      * api：跟 2.x 版本的 compile完全相同
      * implementation：使用了该命令编译的依赖，它仅仅对当前的Module提供接口
      * 在实际开发中优先使用implementation，如果出错在选择api，可以加快编译速度，隐藏对外不必要的接口
      */
     api project(':latte-ec')
+    compileOnly project(':latte-annotations')
     annotationProcessor project(':latte-compiler')
     api 'com.facebook.stetho:stetho:1.5.0'
     api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
