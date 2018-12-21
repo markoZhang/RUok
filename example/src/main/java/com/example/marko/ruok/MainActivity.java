@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.example.latte.activities.ProxyActivity;
 import com.example.latte.app.ISignListener;
+import com.example.latte.app.Latte;
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.launcher.LauncherDelegate;
 import com.example.latte.ec.sign.SignUpDelegate;
@@ -22,6 +23,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
         if (actionBar != null) {
             actionBar.hide();
         }
+        Latte.getConfigurator().withActivity(this);
     }
 
     @Override
@@ -43,10 +45,10 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
     public void onLauncherFinish(onLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-                Toast.makeText(this,"启动结束，用户登录了",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this,"启动结束，用户没登录",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
                 startWithPop(new SignUpDelegate());
                 break;
             default:

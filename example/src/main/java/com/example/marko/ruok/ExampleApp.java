@@ -25,6 +25,8 @@ public class ExampleApp extends Application {
                 .withIcon(new FontEcModule())
                 .withApiHost("http://localhost:8080/untitled_war_exploded/")
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
+                .withWeChatAppId("")
+                .withWeChatAppSerect("")
                 .configure();
         initStetho();
         DatabaseManager.getInstance().init(this);
