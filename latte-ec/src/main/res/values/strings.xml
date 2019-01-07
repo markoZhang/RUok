@@ -11,4 +11,7 @@
     <!--登录-->
     <string name="sign_in_text">登录</string>
     <string name="link_sign_up">还没有账户？现在注册吧</string>
+    <!--toolbar-->
+    <string name="scan">{icon-scan}</string>
+    <string name="search">搜索</string>
 </resources>

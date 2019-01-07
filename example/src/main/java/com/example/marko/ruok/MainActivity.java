@@ -10,6 +10,7 @@ import com.example.latte.app.ISignListener;
 import com.example.latte.app.Latte;
 import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.launcher.LauncherDelegate;
+import com.example.latte.ec.main.EcBottomDelegate;
 import com.example.latte.ec.sign.SignUpDelegate;
 import com.example.latte.ui.launcher.ILauncherListener;
 import com.example.latte.ui.launcher.onLauncherFinishTag;
@@ -38,7 +39,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
 
     @Override
     public void onSignUpSuccess() {
-        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "注 册成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -46,6 +47,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
+                startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
