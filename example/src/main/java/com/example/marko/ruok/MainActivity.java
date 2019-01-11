@@ -30,6 +30,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
     @Override
     public LatteDelegate setRootDelegate() {
         return new LauncherDelegate();
+//        return new ExampleDelegate();
     }
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
 
     @Override
     public void onSignUpSuccess() {
-        Toast.makeText(this, "注 册成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override

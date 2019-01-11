@@ -10,6 +10,7 @@ import com.example.latte.net.callback.RequestCallbacks;
 import com.example.latte.net.download.DownloadHandler;
 import com.example.latte.ui.loader.LatteLoader;
 import com.example.latte.ui.loader.LoaderStyle;
+import com.example.latte.utils.log.LatteLogger;
 
 import java.io.File;
 import java.util.Map;
@@ -87,6 +88,7 @@ public class RestClient {
         }
         switch (method) {
             case GET:
+                LatteLogger.e("*****","url:" + URL);
                 call = service.get(URL, PARAMS);
                 break;
             case POST:
