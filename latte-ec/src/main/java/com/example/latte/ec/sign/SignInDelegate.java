@@ -49,7 +49,7 @@ public class SignInDelegate extends LatteDelegate{
     void onClickSingIn(){
         if (checkForm()){
             RestClient.builder()
-                    .url("http://localhost:8080/untitled_war_exploded/user_profile.json")
+                    .url("http://192.168.1.26:8080/untitled_war_exploded/user_profile.json")
                     .params("email",mEmail.getText().toString())
                     .params("password",mPassword.getText().toString())
                     .success(new ISuccess() {
@@ -68,7 +68,7 @@ public class SignInDelegate extends LatteDelegate{
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
-                            LatteLogger.e("=====>","Sign In Error:" + msg);
+                            LatteLogger.e("=====>","Sign In Erroe:" + msg);
                         }
                     })
                     .build()

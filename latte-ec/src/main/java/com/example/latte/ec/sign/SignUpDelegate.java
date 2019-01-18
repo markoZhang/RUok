@@ -53,7 +53,7 @@ public class SignUpDelegate extends LatteDelegate {
     void onClickSignUp(){
         if (checkForm()){
             RestClient.builder()
-                    .url("http://192.168.23.8:8080/untitled_war_exploded/user_profile.json")
+                    .url("http://192.168.1.26:8080/untitled_war_exploded/user_profile.json")
                     .params("name",mName.getText().toString())
                     .params("email",mEmail.getText().toString())
                     .params("phone",mPhone.getText().toString())

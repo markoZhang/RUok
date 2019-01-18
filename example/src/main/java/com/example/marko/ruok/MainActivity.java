@@ -15,6 +15,8 @@ import com.example.latte.ec.sign.SignUpDelegate;
 import com.example.latte.ui.launcher.ILauncherListener;
 import com.example.latte.ui.launcher.onLauncherFinishTag;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class MainActivity extends ProxyActivity implements ISignListener, ILauncherListener {
 
     @Override

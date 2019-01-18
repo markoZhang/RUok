@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.latte.delegates.bottom.BottomItemDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ec.main.EcBottomDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.ui.recycler.BaseDecoration;
@@ -66,6 +67,12 @@ public class IndexDelegate extends BottomItemDelegate {
         //添加RecyclerView的分割线
         mRecyclerView.addItemDecoration(
                 BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
+
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        //传入ecBottomFragment，则打开和ecBottomFragment同级的页面，底部导航栏不可见
+        //传入this，则打开和IndexFragment同级的页面，底部导航栏可见
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+
     }
 
     @Override
