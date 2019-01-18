@@ -53,6 +53,14 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
         return new MultipleRecyclerAdapter(converter.convert());
     }
 
+    //设置图片加载策略,Glide v4 版本与Glide v3 版本有所不同
+    private static final RequestOptions REQUEST_OPTIONS =
+            new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
+                    .dontAnimate();
+
+
     private void init() {
         //设置不同的item布局
         //将布局加入到数组中，在使用的时候根据itemType取出相应的布局
@@ -89,27 +97,17 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 break;
             case ItemType.IMAGE:
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
-                //Glide v4 版本与Glide v3 版本有所不同
-                RequestOptions options = new RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerCrop()
-                        .dontAnimate();
                 Glide.with(mContext)
                         .load(imageUrl)
-                        .apply(options)
+                        .apply(REQUEST_OPTIONS)
                         .into((ImageView) holder.getView(R.id.image_single));
                 break;
             case ItemType.TEXT_IMAGE:
                 text = entity.getField(MultipleFields.TEXT);
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
-                //Glide v4 版本与Glide v3 版本有所不同
-                RequestOptions options1 = new RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerCrop()
-                        .dontAnimate();
                 Glide.with(mContext)
                         .load(imageUrl)
-                        .apply(options1)
+                        .apply(REQUEST_OPTIONS)
                         .into((ImageView) holder.getView(R.id.img_multiple));
                 holder.setText(R.id.tv_multiple, text);
                 break;
