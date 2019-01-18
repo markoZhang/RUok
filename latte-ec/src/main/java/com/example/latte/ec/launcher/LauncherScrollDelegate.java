@@ -28,7 +28,7 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
 
     //我们传入的是资源文件，所以泛型类型设置为Integer
     private ConvenientBanner<Integer> mConvenientBanner = null;
-    private static final ArrayList<Integer> INTEGERS = new ArrayList<>();
+    private final ArrayList<Integer> INTEGERS = new ArrayList<>();
     private ILauncherListener mILauncherListener = null;
 
     private void initBanner() {
@@ -45,7 +45,6 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
                 .setOnItemClickListener(this)
                 //设置可循环
                 .setCanLoop(false);
-
     }
 
     @Override

@@ -24,8 +24,10 @@ public class BannerCreator {
                 //设置指示器的方向
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setOnItemClickListener(clickListener)
-                .setPageTransformer(new DefaultTransformer())
+//                .setPageTransformer(new DefaultTransformer())
+                //自动轮播延时时间
                 .startTurning(3000)
+                //是否可循环
                 .setCanLoop(true);
 
     }

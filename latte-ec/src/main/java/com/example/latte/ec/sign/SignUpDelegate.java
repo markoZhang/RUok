@@ -13,6 +13,7 @@ import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
 import com.example.latte.net.RestClient;
+import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.utils.log.LatteLogger;
@@ -52,7 +53,7 @@ public class SignUpDelegate extends LatteDelegate {
     void onClickSignUp(){
         if (checkForm()){
             RestClient.builder()
-                    .url("http://192.168.137.250:8080/untitled_war_exploded/user_profile.json")
+                    .url("http://192.168.23.8:8080/untitled_war_exploded/user_profile.json")
                     .params("name",mName.getText().toString())
                     .params("email",mEmail.getText().toString())
                     .params("phone",mPhone.getText().toString())
@@ -62,6 +63,18 @@ public class SignUpDelegate extends LatteDelegate {
                         public void success(String response) {
                             LatteLogger.json("USER_PROFILE",response);
                             SignHandler.onSignUp(response,mISignListener);
+                        }
+                    })
+                    .failure(new IFailure() {
+                        @Override
+                        public void onFailure() {
+                            LatteLogger.e("=====>","Sign Up Failed");
+                        }
+                    })
+                    .error(new IError() {
+                        @Override
+                        public void onError(int code, String msg) {
+                            LatteLogger.e("=====>","Sign Up Error:" + msg);
                         }
                     })
                     .build()

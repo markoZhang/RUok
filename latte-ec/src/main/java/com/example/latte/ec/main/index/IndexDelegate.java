@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -45,21 +46,7 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = new RefreshHandler(mRefreshLayout);
-        RestClient.builder()
-                .url("index.json")
-                .success(new ISuccess() {
-                    @Override
-                    public void success(String response) {
-                        final IndexDataConverter converter = new IndexDataConverter();
-                        converter.setJsonData(response);
-                        final ArrayList<MultipleItemEntity> list = converter.convert();
-                        final String image = list.get(2).getField(MultipleFields.IMAGE_URL);
-                        Toast.makeText(getContext(),image,Toast.LENGTH_LONG).show();
-                    }
-                })
-                .build()
-                .get();
+        mRefreshHandler = RefreshHandler.creator(mRefreshLayout,mRecyclerView,new IndexDataConverter());
     }
 
     private void initRefreshLayout() {
@@ -71,10 +58,16 @@ public class IndexDelegate extends BottomItemDelegate {
         mRefreshLayout.setProgressViewOffset(true, 120, 300);
     }
 
+    private void initRecyclerView(){
+        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),4);
+        mRecyclerView.setLayoutManager(layoutManager);
+    }
+
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        initRecyclerView();
         mRefreshHandler.firstPage("index.json");
     }
 

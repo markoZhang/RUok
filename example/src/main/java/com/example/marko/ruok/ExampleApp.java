@@ -8,6 +8,8 @@ import com.example.latte.ec.icon.FontEcModule;
 import com.example.latte.net.interceptors.DebugInterceptor;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 
 /**
@@ -23,12 +25,15 @@ public class ExampleApp extends Application {
         Latte.init(this)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
-                .withApiHost("http://192.168.137.250:8080/untitled_war_exploded/mall/")
+                .withApiHost("http://192.168.23.8:8080/untitled_war_exploded/mall/")
                 .withInterceptor(new DebugInterceptor("index1", R.raw.test))
                 .withWeChatAppId("")
                 .withWeChatAppSerect("")
                 .configure();
         initStetho();
+        //初始化logger
+        Logger.addLogAdapter(new AndroidLogAdapter());
+        //初始化数据库操作
         DatabaseManager.getInstance().init(this);
     }
 

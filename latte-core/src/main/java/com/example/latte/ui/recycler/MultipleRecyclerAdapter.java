@@ -81,6 +81,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
         final String text;
         final String imageUrl;
         final ArrayList<String> bannerImages;
+        //根据获取数据设置不同的item布局
         switch (holder.getItemViewType()) {
             case ItemType.TEXT:
                 text = entity.getField(MultipleFields.TEXT);
