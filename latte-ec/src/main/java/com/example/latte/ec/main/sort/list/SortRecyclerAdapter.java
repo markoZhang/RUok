@@ -5,15 +5,21 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.example.latte.delegates.LatteDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.main.sort.SortDelegate;
+import com.example.latte.ec.main.sort.content.ContentDelegate;
+import com.example.latte.ui.loader.LatteLoader;
 import com.example.latte.ui.recycler.ItemType;
 import com.example.latte.ui.recycler.MultipleFields;
 import com.example.latte.ui.recycler.MultipleItemEntity;
 import com.example.latte.ui.recycler.MultipleRecyclerAdapter;
 import com.example.latte.ui.recycler.MultipleViewHolder;
+import com.example.latte.utils.log.LatteLogger;
 
 import java.util.List;
+
+import io.reactivex.functions.Function3;
 
 /**
  * @author Marko
@@ -55,6 +61,9 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                             entity.setField(MultipleFields.TAG,true);
                             notifyItemChanged(currentPosition);
                             mPrePosition = currentPosition;
+
+                            final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
+                            showContent(contentId);
                         }
                     }
                 });
@@ -73,6 +82,20 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void showContent(int contentId){
+        LatteLogger.e("========>","contentId = " + contentId);
+        final ContentDelegate contentDelegate = ContentDelegate.newInstance(contentId);
+        switchContent(contentDelegate);
+    }
+
+    private void switchContent(ContentDelegate delegate){
+        final LatteDelegate contentDelegate = DELEGATE.findChildFragment(ContentDelegate.class);
+        if (contentDelegate!=null){
+            //false表示不加入返回栈
+            contentDelegate.replaceFragment(delegate,false);
         }
     }
 }
