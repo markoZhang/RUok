@@ -16,4 +16,5 @@
     <string name="search">搜索</string>
     <!--分类-->
     <string name="sort">分类</string>
+    <string name="discover">发现</string>
 </resources>
