@@ -12,6 +12,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 
+
 /**
  * @author Marko
  * @date 2018/11/14
@@ -35,6 +36,7 @@ public class ExampleApp extends Application {
         Logger.addLogAdapter(new AndroidLogAdapter());
         //初始化数据库操作
         DatabaseManager.getInstance().init(this);
+
     }
 
     private void initStetho() {

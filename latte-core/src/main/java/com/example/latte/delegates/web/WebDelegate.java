@@ -16,12 +16,13 @@ import java.lang.ref.WeakReference;
  * @date 2019/2/12
  */
 
-public abstract class WebDelegate extends LatteDelegate {
+public abstract class WebDelegate extends LatteDelegate implements IWebViewInitializer{
 
     private WebView mWebView = null;
     private final ReferenceQueue<WebView> WEB_VIEW_QUEUE = new ReferenceQueue<>();
     private String mUrl = null;
-    private boolean mIsWebviewAvailable = false;
+    private boolean mIsWebViewAvailable = false;
+    private LatteDelegate mTopDelegate = null;
 
     public WebDelegate() {
     }
@@ -33,6 +34,7 @@ public abstract class WebDelegate extends LatteDelegate {
         super.onCreate(savedInstanceState);
         final Bundle args = getArguments();
         mUrl = args.getString(RouteKeys.URL.name());
+        initWebView();
     }
 
     @SuppressLint("JavascriptInterface")
@@ -49,11 +51,36 @@ public abstract class WebDelegate extends LatteDelegate {
                 mWebView.setWebViewClient(initializer.initWebViewClient());
                 mWebView.setWebChromeClient(initializer.initWebChromeClient());
                 mWebView.addJavascriptInterface(LatteWebInterface.create(this), "latte");
-                mIsWebviewAvailable = true;
+                mIsWebViewAvailable = true;
             } else {
                 throw new NullPointerException("Initializer is null!");
             }
         }
+    }
+
+    public void setTopDelegate(LatteDelegate delegate){
+        mTopDelegate = delegate;
+    }
+
+    public LatteDelegate getTopDelegate(){
+        if (mTopDelegate == null){
+            mTopDelegate = this;
+        }
+        return mTopDelegate;
+    }
+
+    public WebView getWebView() {
+        if (mWebView == null) {
+            throw new NullPointerException("WebView Is Null!");
+        }
+        return mIsWebViewAvailable ? mWebView : null;
+    }
+
+    public String getUrl(){
+        if (mUrl == null) {
+            throw new NullPointerException("WebView Is Null!");
+        }
+        return mUrl;
     }
 
     @Override
@@ -75,7 +102,7 @@ public abstract class WebDelegate extends LatteDelegate {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mIsWebviewAvailable = false;
+        mIsWebViewAvailable = false;
     }
 
     @Override
