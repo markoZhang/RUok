@@ -3,7 +3,7 @@ package com.example.marko.ruok;
 import android.app.Application;
 
 import com.example.latte.app.Latte;
-import com.example.latte.delegates.web.event.TestEvent;
+import com.example.marko.ruok.event.TestEvent;
 import com.example.latte.ec.database.DatabaseManager;
 import com.example.latte.ec.icon.FontEcModule;
 import com.example.latte.net.interceptors.DebugInterceptor;

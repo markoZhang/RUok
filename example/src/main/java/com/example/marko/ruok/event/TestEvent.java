@@ -1,7 +1,9 @@
-package com.example.latte.delegates.web.event;
+package com.example.marko.ruok.event;
 
 import android.webkit.WebView;
 import android.widget.Toast;
+
+import com.example.latte.delegates.web.event.Event;
 
 /**
  * @author Marko
