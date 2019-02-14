@@ -44,7 +44,7 @@ public class WebViewInitializer {
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         final String ua = settings.getUserAgentString();
-        settings.setUserAgentString(ua + "rh");
+        settings.setUserAgentString(ua + "latte");
         //隐藏缩放控件
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
