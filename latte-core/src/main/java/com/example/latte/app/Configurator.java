@@ -117,6 +117,14 @@ public class Configurator {
     }
 
     /**
+     * 传入浏览器host
+     */
+    public final Configurator withWebHost(String host) {
+        LATTE_CONFIGS.put(ConfigKeys.WEB_HOST, host);
+        return this;
+    }
+
+    /**
      * 检查配置是否完成，未完成则抛出运行时异常
      */
     private void checkConfiguration() {
