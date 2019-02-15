@@ -49,7 +49,7 @@ public class SignInDelegate extends LatteDelegate{
     void onClickSingIn(){
         if (checkForm()){
             RestClient.builder()
-                    .url("http://192.168.137.193:8080/untitled_war_exploded/user_profile.json")
+                    .url("user.json")
                     .params("email",mEmail.getText().toString())
                     .params("password",mPassword.getText().toString())
                     .success(new ISuccess() {
