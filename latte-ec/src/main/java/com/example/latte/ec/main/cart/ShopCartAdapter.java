@@ -1,11 +1,15 @@
 package com.example.latte.ec.main.cart;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.latte.app.Latte;
 import com.example.latte.ec.R;
 import com.example.latte.ui.recycler.MultipleFields;
 import com.example.latte.ui.recycler.MultipleItemEntity;
@@ -22,6 +26,8 @@ import java.util.List;
 
 public class ShopCartAdapter extends MultipleRecyclerAdapter {
 
+    private boolean mIsSelectAll = false;
+
     private static final RequestOptions OPTIONS = new RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
@@ -32,8 +38,12 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
         addItemType(ShopCartItemType.SHOP_CART_ITEM, R.layout.item_shop_cart);
     }
 
+    public void setIsSelectAll(boolean isSelectAll){
+        this.mIsSelectAll = isSelectAll;
+    }
+
     @Override
-    protected void convert(MultipleViewHolder holder, MultipleItemEntity entity) {
+    protected void convert(MultipleViewHolder holder, final MultipleItemEntity entity) {
         super.convert(holder, entity);
         switch (holder.getItemViewType()) {
             case ShopCartItemType.SHOP_CART_ITEM:
@@ -62,6 +72,32 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
                         .load(thumb)
                         .apply(OPTIONS)
                         .into(imgThumb);
+
+                //在左侧勾勾渲染之前改变全选与否状态
+                entity.setField(ShopCartItemFields.IS_SELECTED, mIsSelectAll);
+                //根据数据状态显示左侧勾勾
+                final boolean isSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+                if (isSelected) {
+                    iconIsSelected.setTextColor(ContextCompat.getColor(
+                            Latte.getApplicationContext(), R.color.app_main));
+                } else {
+                    iconIsSelected.setTextColor(Color.GRAY);
+                }
+                //添加左侧勾勾的点击事件(点击事件只能使用静态内部类实现，不能使用接口，否则无效)
+                iconIsSelected.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final boolean currentSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+                        if (currentSelected) {
+                            iconIsSelected.setTextColor(Color.GRAY);
+                            entity.setField(ShopCartItemFields.IS_SELECTED, false);
+                        } else {
+                            iconIsSelected.setTextColor(ContextCompat.getColor(
+                                    Latte.getApplicationContext(), R.color.app_main));
+                            entity.setField(ShopCartItemFields.IS_SELECTED, true);
+                        }
+                    }
+                });
                 break;
             default:
                 break;
