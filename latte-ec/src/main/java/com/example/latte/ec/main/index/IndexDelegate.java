@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.latte.delegates.bottom.BottomItemDelegate;
 import com.example.latte.ec.R;
@@ -22,8 +21,6 @@ import com.example.latte.ui.recycler.MultipleFields;
 import com.example.latte.ui.recycler.MultipleItemEntity;
 import com.example.latte.ui.refresh.RefreshHandler;
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 

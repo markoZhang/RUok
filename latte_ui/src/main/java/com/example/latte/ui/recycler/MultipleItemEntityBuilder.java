@@ -1,7 +1,6 @@
 package com.example.latte.ui.recycler;
 
 import java.util.LinkedHashMap;
-import java.util.WeakHashMap;
 
 /**
  * @author Marko

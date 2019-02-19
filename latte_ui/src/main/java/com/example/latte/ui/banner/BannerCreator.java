@@ -1,8 +1,5 @@
 package com.example.latte.ui.banner;
 
-import android.widget.AdapterView;
-
-import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.latte.R;

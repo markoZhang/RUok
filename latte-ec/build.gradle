@@ -28,12 +28,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    latte-ec依赖于latte-core，所以多余的重复代码不需要
-//    implementation 'com.android.support:appcompat-v7:26.1.0'
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api project(':latte-core')
+    //    latte-ec依赖于latte-core，所以多余的重复代码不需要
+    //    implementation 'com.android.support:appcompat-v7:26.1.0'
+    //    testImplementation 'junit:junit:4.12'
+    //    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //在library中使用ButterKnife必须加入此依赖,否则找不到R文件
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    api project(':latte_ui')
 }

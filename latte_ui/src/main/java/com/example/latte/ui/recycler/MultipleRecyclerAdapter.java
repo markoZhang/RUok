@@ -2,8 +2,6 @@ package com.example.latte.ui.recycler;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
-import android.view.ViewDebug;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;

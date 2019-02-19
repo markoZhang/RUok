@@ -20,6 +20,8 @@ import com.example.latte.utils.log.LatteLogger;
 import java.util.List;
 
 import io.reactivex.functions.Function3;
+import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation.SupportHelper;
 
 /**
  * @author Marko
@@ -92,10 +94,11 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
     }
 
     private void switchContent(ContentDelegate delegate){
-        final LatteDelegate contentDelegate = DELEGATE.findChildFragment(ContentDelegate.class);
+        final LatteDelegate contentDelegate =
+                SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
         if (contentDelegate!=null){
             //false表示不加入返回栈
-            contentDelegate.replaceFragment(delegate,false);
+            contentDelegate.getSupportDelegate().replaceFragment(delegate,false);
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.example.latte.ui.recycler;
 
-import com.example.latte.utils.log.LatteLogger;
-
 import java.util.ArrayList;
 
 /**

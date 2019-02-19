@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //RecyclerView
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
+    //RecyclerView分割线
+    api 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    //图片处理
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
+    //Banner依赖
+    compile 'com.bigkoo:ConvenientBanner:2.1.4'
+    api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    //google AutoValue
+    //compileOnly表示再编译期间会使用到这个库，apk打包完成后即被废弃，这个库不会占用apk大小
+    compileOnly 'com.google.auto.value:auto-value-annotations:1.6.2'
+    annotationProcessor "com.google.auto.value:auto-value:1.6.2"
+    //View动画依赖
+    //api'com.nineoldandroids:library:2.4.0'
+    api 'com.daimajia.easing:library:2.0@aar'
+    api 'com.daimajia.androidanimations:library:2.3@aar'
+    /*实现图片圆形化*/
+    api 'de.hdodenhof:circleimageview:2.2.0'
+    api project(':latte-core')
+}

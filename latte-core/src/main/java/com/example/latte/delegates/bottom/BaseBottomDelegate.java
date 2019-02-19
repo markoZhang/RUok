@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -99,8 +100,8 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
                 itemTitle.setTextColor(mClickedColor);
             }
         }
-        final SupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new SupportFragment[size]);
-        loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArray);
+        final ISupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
+        getSupportDelegate().loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArray);
     }
 
     private void resetColor() {
@@ -124,7 +125,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
         itemTitle.setTextColor(mClickedColor);
         //注意先后顺序
-        showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
+        getSupportDelegate().showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
         mCurrentDelegate = tag;
     }
 }

@@ -31,6 +31,7 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
         StatusBarCompat.translucentStatusBar(this, true);
     }
 
+
     @Override
     public LatteDelegate setRootDelegate() {
         return new LauncherDelegate();
@@ -52,14 +53,16 @@ public class MainActivity extends ProxyActivity implements ISignListener, ILaunc
         switch (tag) {
             case SIGNED:
                 Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
-                startWithPop(new EcBottomDelegate());
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
-                startWithPop(new SignUpDelegate());
+                getSupportDelegate().startWithPop(new SignUpDelegate());
                 break;
             default:
                 break;
         }
     }
+
+
 }
